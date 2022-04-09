@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,23 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-	<!-- CSS here -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/css/slicknav.css">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/progressbar_barfiller.css">
     <link rel="stylesheet" href="assets/css/gijgo.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/animated-headline.css">
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="assets/css/themify-icons.css">
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<link rel="stylesheet" href="assets/css/nice-select.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
 <body>
     <!-- ? Preloader Start -->
     <div id="preloader-active">
@@ -40,44 +49,97 @@
     <!-- Preloader Start-->
 
 
-<!-- Register -->
+    <!-- Register -->
 
-<main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
-    <!-- Login Admin -->
-    <form class="form-default" action="" method="POST">
-        <div class="login-form">
-            <!-- logo-login -->
-            <div class="logo-login">
-                <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
-            </div>
-            <h2>Đăng ký</h2>
+    <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
+        <!-- Login Admin -->
+        <div ng-app="myapp" ng-controller="updata">
 
-            <div class="form-input">
-                <label for="name">Họ và tên</label>
-                <input  type="text" name="name" placeholder="Full name">
+            <div class="login-form">
+                <!-- logo-login -->
+                <div class="logo-login">
+                    <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
+                </div>
+
+                <h2>Đăng ký</h2>
+                <form action="" name="signup">
+                    <div class="form-input">
+                        <label for="">Họ và tên</label>
+                        <input type="text" name="na" ng-model="na" ng-minlength="2" ng-maxlength="100"
+                            ng-required="true">
+                        <span class="error" ng-show="signup.na.$error.required">Vui lòng nhập họ tên</span>
+                        <span class="error" ng-show="signup.na.$error.minlength">Nhập họ tên nhiều hơn 2 kí tự</span>
+                        <span class="error" ng-show="signup.na.$error.maxlength">Nhập họ tên ít hơn 100 kí tự</span>
+
+                    </div>
+                    <div class="form-input">
+                        <label for="">Đia chỉ email</label>
+                        <input type="email" name="em" ng-model="em"  ng-pattern="5\d-[A-Z]\d-((\d{4})|(\d{3}\.\d{2}))" required>>
+                        <span class="error" ng-show="signup.em.$error.required">Vui lòng không bỏ trống</span>
+                        <span class="error" ng-show="!signup.em.$error.required&&signup.em.$error.pattern">nhập sai định
+                            dạng email</span>
+                    </div>
+                    <div class="form-input">
+                        <label for="">Mật khẩu</label>
+                        <input type="password" name="pw" ng-model="pw" ng-minlength="8" ng-maxlength="50"
+                            ng-required="true">
+                        <span class="error" ng-show="signup.pw.$error.required">Vui lòng không bỏ trống</span>
+                        <span class="error" ng-show="signup.pw.$error.minlength">Nhập họ tên nhiều hơn 8 kí tự</span>
+                        <span class="error" ng-show="signup.pw.$error.maxlength">Nhập họ tên ít hơn 50 kí tự</span>
+
+                    </div>
+
+
+                    <div class="form-input pt-30">
+                        <input type="submit" name="submit" value="Đăng ký" ng-click="postdata(na, em, pw)">
+                    </div>
+
+
+                    <!-- Forget Password -->
+                    <a href="login.html" class="registration">Đăng nhập</a>
+                </form>
             </div>
-            <div class="form-input">
-                <label for="name">Đia chỉ email</label>
-                <input type="email" name="email" placeholder="Email Address">
-            </div>
-            <div class="form-input">
-                <label for="name">Mật khẩu</label>
-                <input type="password" name="password" placeholder="Mật khẩu">
-            </div>
-            <div class="form-input">
-                <label for="name">Nhập lại mật khẩu</label>
-                <input type="password" name="password" placeholder="Nhập lại mật khẩu">
-            </div>
-            <div class="form-input pt-30">
-                <input type="submit" name="submit" value="Đăng ký">
-            </div>
-            <!-- Forget Password -->
-            <a href="login.html" class="registration">Đăng nhập</a>
+
         </div>
-    </form>
-    <!-- /end login form -->
-</main>
 
+
+        <!-- /end login form -->
+    </main>
+
+
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('updata', function ($scope, $http, $window)
+        {
+
+            $scope.na = null;
+            $scope.em = null;
+            $scope.pw = null;
+            $scope.postdata = function ($e, na, em, pw)
+            {
+
+                var data = {
+                    name: na,
+                    email: em,
+                    password: pw
+                };
+                $e.prevenDefault(); 
+                $http.post('http://localhost:3000/user', JSON.stringify(data))
+                    .then(function (response)
+                    {
+                        if (response.data)
+                            alert('Đăng ký thành công');
+
+                    },
+                        function (response)
+                        {
+                            alert('Đăng ký thất bại');
+                        });
+
+            };
+
+        });
+    </script>
 
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
@@ -105,7 +167,7 @@
     <script src="./assets/js/jquery.sticky.js"></script>
     <!-- Progress -->
     <script src="./assets/js/jquery.barfiller.js"></script>
-    
+
     <!-- counter , waypoint,Hover Direction -->
     <script src="./assets/js/jquery.counterup.min.js"></script>
     <script src="./assets/js/waypoints.min.js"></script>
@@ -118,10 +180,11 @@
     <script src="./assets/js/jquery.validate.min.js"></script>
     <script src="./assets/js/mail-script.js"></script>
     <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
+
+    <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
-    
-    </body>
+
+</body>
+
 </html>
