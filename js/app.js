@@ -42,15 +42,20 @@ app.directive('quiz', function(quizFactor,$routeParams){
         templateUrl:'template-quiz.html',
         link: function(scope,elem,atrs){
             scope.start = function(){
-                quizFactor.getQuestions().then(function(){
-                    scope.subjectName = $routeParams.name
-                    scope.id=0;
-                    scope.quizOver = false // chưa hoàn thành
-                    scope.inProgess = true;
-                    scope.getQuestion();
-                    scope.loadQuestion();
-                    scope.freques = false;
-                })
+                if(!sessionStorage.getItem('nameUser')){
+                    alert("Bạn cần đăng nhập để làm quiz")
+                    document.location = "login.html"
+                }else{
+                    quizFactor.getQuestions().then(function(){
+                        scope.subjectName = $routeParams.name
+                        scope.id=0;
+                        scope.quizOver = false // chưa hoàn thành
+                        scope.inProgess = true;
+                        scope.getQuestion();
+                        scope.loadQuestion();
+                        scope.freques = false;
+                    })
+                }
                
             };
             
@@ -291,5 +296,24 @@ app.controller("TimeQuiz",function($scope,$interval){
 
     },1000)
 
+})
 
+
+app.controller("login",function($scope){
+  
+    if(sessionStorage.getItem('nameUser')){
+
+        $scope.user= true;
+
+    }else{
+
+        $scope.user= false;
+
+    }
+   
+
+    $scope.logout = function(){
+        sessionStorage.clear();
+        window.location.reload();
+    }
 })
