@@ -71,13 +71,15 @@ app.directive('quiz', function(quizFactor,$routeParams){
             scope.mark = 0;
             scope.handInQuizz = function() {
                 scope.quizOver = true;
+                clearInterval(); 
                 for(var i = 0; i < scope.listAns.length; i++) {
                     console.log(`Câu TL:  ${scope.listAns[i].ans}, Đáp án: ${scope.listAns[i].idAnsRight}`);
                     if(scope.listAns[i].ans == scope.listAns[i].idAnsRight) {
                         scope.mark++;
                     }
+                  
                 }
-                clearInterval()
+                // clearInterval()
                 if(scope.mark >= 5){
                     return scope.result = "đậu"
                 }

@@ -23,7 +23,11 @@
       "email": "phuly4795@gmail.com",
       "password": "1",
       "id": 10
+    },
+    {
+      "name": "admin@gmail.com",
+      "email": "12345678",
+      "id": 11
     }
-  
   ]
 }

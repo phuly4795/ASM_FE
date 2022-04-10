@@ -32,6 +32,11 @@
     .error {
         color: red;
     }
+
+    .form-group.invalid .form-label,
+    .form-group.invalid .test-masage {
+        color: #FF3300;
+    }
 </style>
 
 <body>
@@ -53,53 +58,60 @@
 
     <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
         <!-- Login Admin -->
-        <div ng-app="myapp" ng-controller="updata">
+        <div ng-app="myapp">
+            <div ng-controller="updata">
+                <div class="login-form">
+                    <!-- logo-login -->
+                    <div class="logo-login">
+                        <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
+                    </div>
 
-            <div class="login-form">
-                <!-- logo-login -->
-                <div class="logo-login">
-                    <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
+                    <h2>Đăng ký</h2>
+                    <form action="" name="signup" id="formdangky" method="post">
+                        <div class="form-input form-group">
+                            <label for="">Họ và tên</label>
+                            <input type="text" name="na" ng-model="na" id="na" ng-required="true" ng-minlength="8"
+                                ng-maxlength="50">
+                            <span class="test-masage"> </span>
+                            <span class="error" ng-show="signup.na.$error.required">Vui lòng nhập họ tên</span>
+                            <span class="error" ng-show="signup.na.$error.minlength">Nhập họ tên nhiều hơn 2 kí
+                                tự</span>
+                            <span class="error" ng-show="signup.na.$error.maxlength">Nhập họ tên ít hơn 100 kí tự</span>
+
+                        </div>
+                        <div class="form-input form-group">
+                            <label for="">Đia chỉ email</label>
+                            <input type="email" name="em" ng-model="em" id="em"
+                                ng-pattern="5\d-[A-Z]\d-((\d{4})|(\d{3}\.\d{2}))" required>
+                            <span class="test-masage"> </span>
+                            <span class="error" ng-show="signup.em.$error.required">Vui lòng không bỏ trống</span>
+                            <span class="error" ng-show="!signup.em.$error.required&&signup.em.$error.pattern">nhập sai
+                                định
+                                dạng email</span>
+                        </div>
+                        <div class="form-input form-group">
+                            <label for="">Mật khẩu</label>
+                            <input type="password" name="pw" ng-model="pw" id="pw" ng-minlength="8" ng-maxlength="50"
+                                ng-required="true">
+                            <span class="test-masage"> </span>
+                            <span class="error" ng-show="signup.pw.$error.required">Vui lòng không bỏ trống</span>
+                            <span class="error" ng-show="signup.pw.$error.minlength">Nhập họ tên nhiều hơn 8 kí
+                                tự</span>
+                            <span class="error" ng-show="signup.pw.$error.maxlength">Nhập họ tên ít hơn 50 kí tự</span>
+
+                        </div>
+
+
+                        <div class="form-input pt-30">
+                            <input type="submit" value=" Đăng ký" ng-click="postdata(na, em, pw)">
+                        </div>
+
+
+                        <!-- Forget Password -->
+                        <a href="login.html" class="registration">Đăng nhập</a>
+                    </form>
                 </div>
-
-                <h2>Đăng ký</h2>
-                <form action="" name="signup">
-                    <div class="form-input">
-                        <label for="">Họ và tên</label>
-                        <input type="text" name="na" ng-model="na" ng-minlength="2" ng-maxlength="100"
-                            ng-required="true">
-                        <span class="error" ng-show="signup.na.$error.required">Vui lòng nhập họ tên</span>
-                        <span class="error" ng-show="signup.na.$error.minlength">Nhập họ tên nhiều hơn 2 kí tự</span>
-                        <span class="error" ng-show="signup.na.$error.maxlength">Nhập họ tên ít hơn 100 kí tự</span>
-
-                    </div>
-                    <div class="form-input">
-                        <label for="">Đia chỉ email</label>
-                        <input type="email" name="em" ng-model="em"  ng-pattern="5\d-[A-Z]\d-((\d{4})|(\d{3}\.\d{2}))" required>>
-                        <span class="error" ng-show="signup.em.$error.required">Vui lòng không bỏ trống</span>
-                        <span class="error" ng-show="!signup.em.$error.required&&signup.em.$error.pattern">nhập sai định
-                            dạng email</span>
-                    </div>
-                    <div class="form-input">
-                        <label for="">Mật khẩu</label>
-                        <input type="password" name="pw" ng-model="pw" ng-minlength="8" ng-maxlength="50"
-                            ng-required="true">
-                        <span class="error" ng-show="signup.pw.$error.required">Vui lòng không bỏ trống</span>
-                        <span class="error" ng-show="signup.pw.$error.minlength">Nhập họ tên nhiều hơn 8 kí tự</span>
-                        <span class="error" ng-show="signup.pw.$error.maxlength">Nhập họ tên ít hơn 50 kí tự</span>
-
-                    </div>
-
-
-                    <div class="form-input pt-30">
-                        <input type="submit" name="submit" value="Đăng ký" ng-click="postdata(na, em, pw)">
-                    </div>
-
-
-                    <!-- Forget Password -->
-                    <a href="login.html" class="registration">Đăng nhập</a>
-                </form>
             </div>
-
         </div>
 
 
@@ -107,39 +119,56 @@
     </main>
 
 
+    <!-- <script src="js/validator.js"></script>
+    <script>
+        Validator({
+            form: '#formdangky',
+            errorMessage: '.test-masage',
+            rules: [
+                Validator.isRequired('#na', 'Mời bạn nhập tên đăng ký'),
+                Validator.isRequired('#em', 'Mời bạn nhập tên đăng ký'),
+                Validator.isRequired('#pw', 'Mời bạn nhập tên đăng ký'),
+            ],
+        });
+    </script> -->
+
     <script>
         var app = angular.module('myapp', []);
-        app.controller('updata', function ($scope, $http, $window)
+        app.controller('updata', function ($scope, $http)
         {
 
-            $scope.na = null;
-            $scope.em = null;
-            $scope.pw = null;
-            $scope.postdata = function ($e, na, em, pw)
+            // $scope.na = null;
+            // $scope.em = null;
+            // $scope.pw = null;
+            $scope.postdata = function (na, em, pw)
             {
-
                 var data = {
                     name: na,
                     email: em,
                     password: pw
                 };
-                $e.prevenDefault(); 
                 $http.post('http://localhost:3000/user', JSON.stringify(data))
                     .then(function (response)
                     {
                         if (response.data)
+                        {
                             alert('Đăng ký thành công');
+                            sessionStorage.setItem('nameUser', dataGet.name);
+                            document.location = "/"
 
+                        }
                     },
                         function (response)
                         {
                             alert('Đăng ký thất bại');
-                        });
 
+                        });
             };
+
 
         });
     </script>
+
 
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
