@@ -19,6 +19,9 @@ app.config(function($routeProvider){
         templateUrl: 'quiz.html',    
         controller:'quizCtrl'
     })
+    .otherwise({
+        redirectTo:"/"
+    })
 
 })
 
@@ -69,15 +72,13 @@ app.directive('quiz', function(quizFactor,$routeParams){
             }
 
             scope.mark = 0;
-            scope.handInQuizz = function() {
-                scope.quizOver = true;
-                clearInterval(); 
+            scope.handInQuizz = function() {          
+                scope.quizOver = true;                       
                 for(var i = 0; i < scope.listAns.length; i++) {
                     console.log(`Câu TL:  ${scope.listAns[i].ans}, Đáp án: ${scope.listAns[i].idAnsRight}`);
                     if(scope.listAns[i].ans == scope.listAns[i].idAnsRight) {
                         scope.mark++;
-                    }
-                  
+                    }           
                 }
                 // clearInterval()
                 if(scope.mark >= 5){
