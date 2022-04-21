@@ -14,7 +14,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Khóa học</a></li>
+                                            <li class="breadcrumb-item">Khóa học</li>
                                         </ol>
                                     </nav>
                                     <!-- breadcrumb End -->
@@ -33,11 +33,13 @@
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mb-55">
                             <h2>Các khóa học nổi bật</h2>
+                            <p>Tìm kiếm khóa học</p><input type="text" class="form-control" name="search" ng-model="searchText" placeholder="nhập tên khóa học cần tìm">
                         </div>
                     </div>
                 </div>
+              
                 <div class="row" ng-controller="subjectsCtrl" >
-                    <div class="col-lg-3" ng-repeat="sub in list_subject" >
+                    <div class="col-lg-3" ng-repeat="sub in list_subject | filter: searchText" >
                         <div class="properties properties2 mb-30">
                             <div class="properties__card">
                                 <div class="properties__img overlay1">
