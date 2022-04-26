@@ -281,7 +281,7 @@ app.factory('quizFactor', function($http,$routeParams){
 })
 app.controller("TimeQuiz",function($scope,$interval){
    
-    $scope.time =  59
+    $scope.time =  7
 
      $interval(function(){
 
@@ -289,8 +289,7 @@ app.controller("TimeQuiz",function($scope,$interval){
 
         if($scope.time == 0){
 
-            alert('hết giờ')
- 
+        
             $scope.handInQuizz();
 
             clearInterval(); 
